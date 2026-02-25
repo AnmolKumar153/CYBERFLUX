@@ -1,6 +1,6 @@
 # CyberFlux
 
-so basically i was learning about cybersecurity and URL based attacks and i thought why not just build something instead of only reading about it. that's how this project started. it's a URL checker that looks at a link and tells you whether it seems safe or not.
+So basically i was learning about cybersecurity and URL based attacks and i thought why not just build something instead of only reading about it. that's how this project started. it's a URL checker that looks at a link and tells you whether it seems safe or not.
 
 it's not perfect but it covers the important stuff and it actually works, which i'm pretty happy about.
 
@@ -122,4 +122,4 @@ go ahead, open a PR or raise an issue. i'm still learning this stuff so if you s
 
 ---
 
-built by Anmol Kumar
+Built by TEAM CYBERFLUX
