@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberFlux</title>
+    <link rel="stylesheet" href="cyberflux.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+    <div class="nav-bar">
+        <img src="cyberfluxlogo.png" class="logo">
+        <button class="nav" type="button"><a href="#" class="link">Home</a></button>
+        <button class="nav"><a href="about.html" class="link">About us</a></button>
+        <button class="nav"><a href="features.html" class="link">Features</a></button>
+        <button class="nav"><a href="contact.html" class="link">Contact us</a></button>
+        <div class="sear">
+            <input type="text" id="search" placeholder="Search here" class="search">
+            <label for="search"><i class="fa-brands fa-searchengin searchs"></i></label>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="side-content">
+
+            <div class="main">
+                <h1>CyberFlux URL Guard</h1>
+                <p class="in">Instant protection against phishing, malware and malicious domains. Enter a URL to check its reputation.</p>
+            </div>
+
+            <div class="s">
+                <input class="place" type="text" id="url" placeholder="https://example.com/check-me">
+                <button class="check" type="button" onclick="checkURL()">
+                    Check URL <i class="fa-solid fa-shield one"></i>
+                </button>
+            </div>
+
+            <!-- loading spinner -->
+            <div id="loading" class="loading" style="display:none;">
+                <div class="spinner"></div>
+                <p>Scanning URL for threats...</p>
+            </div>
+
+            <!-- result shown here on the page -->
+            <div id="result-box" class="result-box" style="display:none;">
+                <div id="verdict-banner" class="verdict-banner">
+                    <div id="verdict-icon" class="verdict-icon"></div>
+                    <div class="verdict-text">
+                        <h2 id="verdict-label"></h2>
+                        <p id="verdict-reason"></p>
+                    </div>
+                    <div id="score-pill" class="score-pill"></div>
+                </div>
+                <p id="checked-url" class="checked-url"></p>
+                <div id="features-grid" class="features-grid"></div>
+            </div>
+
+            <div class="four-box">
+                <div class="four">
+                    <div class="carding">
+                        <span class="icon"><i class="fa-solid fa-earth-americas"></i></span>
+                        <div class="card-infos">
+                            <h3>URL Reputation</h3>
+                            <p class="card-info">Scans global databases for unknown phishing and malicious reports</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="four">
+                    <div class="carding">
+                        <span class="icon"><i class="fa-solid fa-microscope"></i></span>
+                        <div class="card-infos">
+                            <h3>Malware Scan</h3>
+                            <p class="card-info">Deep behavioural analysis to detect hidden scripts and payloads</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="four">
+                    <div class="carding">
+                        <span class="icon"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                        <div class="card-infos">
+                            <h3>Domain Age Check</h3>
+                            <p class="card-info">Identifies suspicious new domains used for targeted attacks</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="four">
+                    <div class="carding">
+                        <span class="icon"><i class="fa-regular fa-circle-check"></i></span>
+                        <div class="card-infos">
+                            <h3>SSL Verification</h3>
+                            <p class="card-info">Analyzes certificate chains for legitimacy and encryption levels</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="four">
+                    <div class="carding">
+                        <span class="icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                        <div class="card-infos">
+                            <h3>Typo-Squatting</h3>
+                            <p class="card-info">Detects look-alike domains created by misspelling trusted URLs</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="four">
+                    <div class="carding">
+                        <span class="icon"><i class="fa-solid fa-location-dot"></i></span>
+                        <div class="card-infos">
+                            <h3>IP Address Detection</h3>
+                            <p class="card-info">Identifies suspicious or malicious IPs to detect unsafe connections</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="foot">
+            <h3>CyberFlux</h3>
+            <br>
+            <p>Secure your browsing with real-time URL protection and threat detection.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="#" class="design">Home</a>
+            <a href="about.html" class="design">About</a>
+            <a href="features.html" class="design">Features</a>
+            <a href="contact.html" class="design">Contact</a>
+        </div>
+        <div class="footer-sections">
+            <h4>Contact</h4>
+            <br>
+            <p>Email: support@cyberflux.com</p>
+            <br>
+            <p>Phone: +91 123456789</p>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CyberFlux | All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const iconMap = {
+            "URL Length": "📏", "HTTPS": "🔒", "IP Address": "🖥️",
+            "Suspicious Keywords": "🔑", "Subdomain Count": "🌐", "@ Symbol": "＠",
+            "Hyphen-Heavy Domain": "➖", "Unicode Homograph": "🔤",
+            "Typosquatting": "🎭", "URL Shortener": "🔗", "Domain Age Suspicion": "📅"
+        };
+
+        const shorteners = ["bit.ly","tinyurl.com","t.co","goo.gl","ow.ly","is.gd","buff.ly","rebrand.ly","bl.ink","short.io","cutt.ly","tiny.cc"];
+        const suspiciousWords = ["login","verify","secure","update","confirm","account","banking","paypal","password","signin","support","ebay","amazon","apple","microsoft"];
+        const popularDomains = ["google","facebook","amazon","microsoft","apple","paypal","instagram","twitter","netflix","youtube","linkedin","whatsapp","gmail"];
+
+        function levenshtein(a, b) {
+            const dp = Array.from({length: a.length + 1}, (_, i) => [i]);
+            for (let j = 1; j <= b.length; j++) dp[0][j] = j;
+            for (let i = 1; i <= a.length; i++)
+                for (let j = 1; j <= b.length; j++)
+                    dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+            return dp[a.length][b.length];
+        }
+
+        function analyzeURL(rawURL) {
+            let input = rawURL;
+            if (!/^https?:\/\//i.test(input)) input = "http://" + input;
+
+            let parsed;
+            try { parsed = new URL(input); }
+            catch(e) { return null; }
+
+            const full        = rawURL;
+            const hostname    = parsed.hostname.toLowerCase();
+            const domainParts = hostname.split(".");
+            const baseDomain  = domainParts.slice(-2).join(".");
+            const baseName    = domainParts.slice(-2, -1)[0] || "";
+
+            const features = [];
+            let badCount = 0, warnCount = 0;
+
+            // 1. URL Length
+            if (full.length > 100) {
+                features.push({ name: "URL Length", status: "bad",  detail: `Very long (${full.length} chars) — often used to hide malicious paths.` });
+                badCount++;
+            } else if (full.length > 60) {
+                features.push({ name: "URL Length", status: "warn", detail: `Moderately long (${full.length} chars).` });
+                warnCount++;
+            } else {
+                features.push({ name: "URL Length", status: "ok",   detail: `Normal length (${full.length} chars).` });
+            }
+
+            // 2. HTTPS
+            if (parsed.protocol === "https:") {
+                features.push({ name: "HTTPS", status: "ok",  detail: "Uses HTTPS — connection is encrypted." });
+            } else {
+                features.push({ name: "HTTPS", status: "bad", detail: "No HTTPS — data is sent in plain text." });
+                badCount++;
+            }
+
+            // 3. IP Address
+            if (/^(\d{1,3}\.){3}\d{1,3}$/.test(hostname)) {
+                features.push({ name: "IP Address", status: "bad", detail: "Uses a raw IP instead of a domain name — very suspicious." });
+                badCount++;
+            } else {
+                features.push({ name: "IP Address", status: "ok", detail: "Uses a proper domain name, not a raw IP." });
+            }
+
+            // 4. Suspicious Keywords
+            const found = suspiciousWords.filter(w => full.toLowerCase().includes(w));
+            if (found.length >= 2) {
+                features.push({ name: "Suspicious Keywords", status: "bad",  detail: `Found: ${found.join(", ")}.` });
+                badCount++;
+            } else if (found.length === 1) {
+                features.push({ name: "Suspicious Keywords", status: "warn", detail: `Contains "${found[0]}" — could be legit but worth noting.` });
+                warnCount++;
+            } else {
+                features.push({ name: "Suspicious Keywords", status: "ok",   detail: "No suspicious keywords found." });
+            }
+
+            // 5. Subdomain Count
+            const subs = domainParts.length - 2;
+            if (subs > 2) {
+                features.push({ name: "Subdomain Count", status: "bad",  detail: `${subs} subdomains — unusually deep, common in phishing.` });
+                badCount++;
+            } else if (subs === 2) {
+                features.push({ name: "Subdomain Count", status: "warn", detail: "2 subdomains — slightly suspicious." });
+                warnCount++;
+            } else {
+                features.push({ name: "Subdomain Count", status: "ok",   detail: subs === 0 ? "No subdomains." : "1 subdomain — normal." });
+            }
+
+            // 6. @ Symbol
+            if (full.includes("@")) {
+                features.push({ name: "@ Symbol", status: "bad", detail: '"@" found — browsers ignore everything before it, a classic phishing trick.' });
+                badCount++;
+            } else {
+                features.push({ name: "@ Symbol", status: "ok", detail: 'No "@" symbol found.' });
+            }
+
+            // 7. Hyphen-Heavy Domain
+            const hyphens = (baseName.match(/-/g) || []).length;
+            if (hyphens > 2) {
+                features.push({ name: "Hyphen-Heavy Domain", status: "bad",  detail: `${hyphens} hyphens in domain — often seen in fake sites.` });
+                badCount++;
+            } else if (hyphens > 0) {
+                features.push({ name: "Hyphen-Heavy Domain", status: "warn", detail: `${hyphens} hyphen(s) — might be fine, but take note.` });
+                warnCount++;
+            } else {
+                features.push({ name: "Hyphen-Heavy Domain", status: "ok",   detail: "No hyphens in domain name." });
+            }
+
+            // 8. Unicode Homograph
+            if (/[^\x00-\x7F]/.test(hostname)) {
+                features.push({ name: "Unicode Homograph", status: "bad", detail: "Non-ASCII characters detected — could be impersonating a real site." });
+                badCount++;
+            } else {
+                features.push({ name: "Unicode Homograph", status: "ok", detail: "All characters are standard ASCII." });
+            }
+
+            // 9. Typosquatting
+            let closest = null, minDist = 999;
+            for (const d of popularDomains) {
+                const dist = levenshtein(baseName, d);
+                if (dist < minDist) { minDist = dist; closest = d; }
+            }
+            if (minDist === 1 && baseName !== closest) {
+                features.push({ name: "Typosquatting", status: "bad",  detail: `"${baseName}" is 1 char away from "${closest}" — likely typosquatting.` });
+                badCount++;
+            } else if (minDist === 2 && baseName !== closest) {
+                features.push({ name: "Typosquatting", status: "warn", detail: `"${baseName}" looks similar to "${closest}" — double check.` });
+                warnCount++;
+            } else {
+                features.push({ name: "Typosquatting", status: "ok",   detail: "Domain doesn't resemble any known popular site." });
+            }
+
+            // 10. URL Shortener
+            if (shorteners.includes(baseDomain)) {
+                features.push({ name: "URL Shortener", status: "warn", detail: `Uses ${baseDomain} — shortened URLs hide the real destination.` });
+                warnCount++;
+            } else {
+                features.push({ name: "URL Shortener", status: "ok", detail: "Not a known URL shortener." });
+            }
+
+            // 11. Domain Age Suspicion (heuristic)
+            const looksRandom = /^[a-z0-9]{12,}$/.test(baseName) || /\d{5,}/.test(baseName);
+            if (looksRandom) {
+                features.push({ name: "Domain Age Suspicion", status: "warn", detail: `"${baseName}" looks auto-generated — may be a throwaway domain.` });
+                warnCount++;
+            } else {
+                features.push({ name: "Domain Age Suspicion", status: "ok", detail: "Domain name looks normal and human-chosen." });
+            }
+
+            // Verdict
+            const riskScore = Math.min(100, badCount * 15 + warnCount * 7);
+            let verdict, verdict_label, verdict_reason;
+
+            if (badCount >= 3) {
+                verdict = "danger";
+                verdict_label = "Likely Malicious";
+                verdict_reason = `${badCount} high-risk signals detected — avoid this URL.`;
+            } else if (badCount >= 1 || warnCount >= 3) {
+                verdict = "warning";
+                verdict_label = "Suspicious";
+                verdict_reason = `${badCount} risk(s) and ${warnCount} warning(s) found — proceed with caution.`;
+            } else {
+                verdict = "safe";
+                verdict_label = "Looks Safe";
+                verdict_reason = "No major threats detected. Still browse carefully.";
+            }
+
+            return { verdict, verdict_label, verdict_reason, risk_score: riskScore, features };
+        }
+
+        function checkURL() {
+            const raw = document.getElementById("url").value.trim();
+            if (!raw) return;
+
+            document.getElementById("result-box").style.display = "none";
+            document.getElementById("loading").style.display = "block";
+            document.getElementById("loading").scrollIntoView({ behavior: "smooth", block: "center" });
+
+            setTimeout(() => {
+                const result = analyzeURL(raw);
+                document.getElementById("loading").style.display = "none";
+
+                if (!result) {
+                    alert("Invalid URL. Please enter something like https://example.com");
+                    return;
+                }
+                showResult(result, raw);
+            }, 600);
+        }
+
+        function showResult(res, url) {
+            const emojiMap = { safe: "✅", warning: "⚠️", danger: "🚨" };
+
+            document.getElementById("verdict-banner").className = "verdict-banner " + res.verdict;
+            document.getElementById("verdict-icon").textContent  = emojiMap[res.verdict];
+            document.getElementById("verdict-label").textContent = res.verdict_label;
+            document.getElementById("verdict-reason").textContent = res.verdict_reason;
+
+            const pill = document.getElementById("score-pill");
+            pill.textContent = "Risk " + res.risk_score + "/100";
+            pill.className = "score-pill " + res.verdict;
+
+            document.getElementById("checked-url").textContent = "Checked: " + url;
+
+            document.getElementById("features-grid").innerHTML = res.features.map(f => `
+                <div class="feature-card ${f.status}">
+                    <div class="feature-icon">${iconMap[f.name] || "🔍"}</div>
+                    <div class="feature-info">
+                        <strong>${f.name}</strong>
+                        <span>${f.detail}</span>
+                    </div>
+                    <div class="status-badge">${f.status}</div>
+                </div>
+            `).join("");
+
+            const box = document.getElementById("result-box");
+            box.style.display = "block";
+            box.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("url").addEventListener("keydown", e => {
+                if (e.key === "Enter") checkURL();
+            });
+        });
+    </script>
+
+</body>
+</html>
