@@ -1,120 +1,125 @@
-🔥 CYBERFLUX
-CYBERFLUX is a modular URL intelligence and phishing detection framework built with Python and a modern web interface.
+# CyberFlux
 
-It analyzes URLs using multiple security checks, evaluates risk indicators, and generates a structured risk score to help detect suspicious or malicious links.
+so basically i was learning about cybersecurity and URL based attacks and i thought why not just build something instead of only reading about it. that's how this project started. it's a URL checker that looks at a link and tells you whether it seems safe or not.
 
-Designed with a scalable architecture, CYBERFLUX separates routing, analysis logic, scoring, and services for clean maintainability and future expansion.
+it's not perfect but it covers the important stuff and it actually works, which i'm pretty happy about.
 
-🚀 Features
-🔍 Multi-layer URL analysis engine
-🧠 Modular check-based architecture
-📊 Risk scoring system
-🌍 Geo & ISP lookup
-🔐 HTTPS & domain validation checks
-🧪 Unit testing support
-🎨 Clean frontend interface
-🗄 SQLite database integration
-🧠 Security Checks Implementation
-The system performs multiple phishing and suspicious pattern checks:
+---
 
-@ Symbol detection
-Domain age verification
-IP-based URL detection
-HTTPS validation
-Hyphen usage check
-URL length analysis
-Subdomain analysis
-Typosquatting detection
-Unicode character detection
-URL shortener detection
-Keyword-based phishing detection
-IP resolution
-Geo lookup
-ISP lookup
-Each check is modular and located inside:
+## what does it do
 
-🛠 Installation Guide
-CYBERFLUX can be installed on Kali Linux, Windows, Ubuntu/Linux, and macOS.
+you paste a URL, click the button, and it runs 11 different checks on it right in the browser. no data goes anywhere, no server involved, everything happens locally.
 
-🐉 Kali Linux Installation
-1️⃣ Update System
-sudo apt update && sudo apt upgrade -y
-sudo apt install python3 python3-pip python3-venv git -y
-git clone https://github.com/Harshul055/CYBERFLUX.git
+the checks it runs:
+
+- is the URL weirdly long (phishing URLs tend to be massive)
+- does it use HTTPS
+- is the domain actually just an IP address
+- does it have sketchy words like "login", "verify", "secure", "confirm" etc.
+- how many subdomains does it have
+- does it have an @ symbol (this is a known trick to fool people)
+- too many hyphens in the domain name
+- any weird unicode characters that look like normal letters
+- does the domain look like a misspelling of google, paypal, amazon etc.
+- is it a URL shortener like bit.ly or tinyurl
+- does the domain name look randomly generated
+
+at the end it gives you a risk score and tells you if the URL looks safe, suspicious, or likely malicious.
+
+---
+
+## how to run it
+
+it's just HTML, CSS and JS so there's nothing to install or build. the only thing is you shouldn't open the HTML file directly by double clicking it, some browsers act weird with the file:// protocol. just spin up a local server real quick, it takes like a minute.
+
+### Windows
+
+open command prompt or powershell and run:
+
+```
+git clone https://github.com/AnmolKumar153/CYBERFLUX.git
 cd CYBERFLUX
-2️⃣ Virtual Environment creation
-python3 -m venv venv
-source venv/bin/activate
-3️⃣ Requirements Installation
-pip install -r requirements.txt
-4️⃣ Run Application
-python run.py
-🐧 Ubuntu / Linux Installation
-1️⃣ Install Dependencies
-sudo apt update
-sudo apt install python3 python3-pip python3-venv git sqlite3 -y
-2️⃣ Clone Repository
-git clone https://github.com/Harshul055/CYBERFLUX.git
+```
+
+if you have python (check by typing `python --version`):
+
+```
+python -m http.server 5500
+```
+
+then just go to `http://localhost:5500` in your browser and that's it.
+
+if python isn't there, install VS Code, get the Live Server extension, open the folder and right click index.html then click "Open with Live Server". easiest option honestly.
+
+---
+
+### macOS
+
+```
+git clone https://github.com/AnmolKumar153/CYBERFLUX.git
 cd CYBERFLUX
-3️⃣ Create Virtual Environment
-python3 -m venv venv
-source venv/bin/activate
-4️⃣ Install Requirements
-pip install -r requirements.txt
-5️⃣ Start Server
-python run.py
-🪟 Windows Installation
-1️⃣ Install Python
-Download and install Python 3.x from: https://www.python.org/downloads/
+python3 -m http.server 5500
+```
 
-Download github from: https://git-scm.com/install/windows:
+mac already has python3 so it should just work. open `http://localhost:5500` and you're good. Ctrl+C to kill the server when you're done.
 
-✔ Make sure to check "Add Python to PATH" during installation.
+---
 
-2️⃣ Install Git & Clone Repository (Command Prompt or PowerShell)
-git clone https://github.com/Harshul055/CYBERFLUX.git
+### Linux
+
+```
+sudo apt install git        # skip if you already have it
+git clone https://github.com/AnmolKumar153/CYBERFLUX.git
 cd CYBERFLUX
-3️⃣ Install Dependencies
-pip install -r requirements.txt
-4️⃣ Run Application
-python run.py
-🍎 macOS Installation
-1️⃣ Install Homebrew (if not installed)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-2️⃣ Install Python & Git
-brew install python git sqlite
-3️⃣ Clone Repository
-git clone https://github.com/Harshul055/CYBERFLUX.git
+python3 -m http.server 5500
+```
+
+same thing, go to `http://localhost:5500`. if you're on fedora or arch just swap apt for dnf or pacman.
+
+---
+
+### Kali Linux
+
+git and python3 come pre-installed on kali so honestly just:
+
+```
+git clone https://github.com/AnmolKumar153/CYBERFLUX.git
 cd CYBERFLUX
-4️⃣ Create Virtual Environment
-python3 -m venv venv
-source venv/bin/activate
-5️⃣ Install Requirements
-pip install -r requirements.txt
-6️⃣ Run Application
-python run.py
-⚠️ Troubleshooting
-Ensure Python version is 3.8+
+python3 -m http.server 5500
+```
 
-Ensure virtual environment is activated
+open firefox or chromium, go to `http://localhost:5500`, done.
 
-If port 5000 is in use, modify port inside app.py
+---
 
-📊 How It Works
-User submits a URL via the frontend.
+## files in this project
 
-Backend routes handle the request.
+```
+CYBERFLUX/
+├── index.html
+├── cyberflux.css
+├── about.html
+├── features.html
+├── contact.html
+└── cyberfluxlogo.png
+```
 
-analyzer_core.py executes all checks inside checks/.
+---
 
-Each check returns structured results.
+## stuff i know isn't perfect
 
-scoring.py calculates a risk score.
+the domain age check is a heuristic, not a real WHOIS lookup. doing actual WHOIS from the browser isn't possible without a backend so i made it check if the domain name looks auto-generated instead. it's not ideal but it catches some cases.
 
-Final analysis report is returned to the user.
+also it only reads the URL string, it doesn't actually visit the page or scan any content. so if a phishing site has a clean-looking URL it won't catch it. that's a limitation i'm aware of.
 
-👨‍💻 Authors
-Harshul Agarwal
-Anmol Kumar
-Ayush Varshney
-Mounil Gautam
+maybe someday i'll add a small backend to handle the real WHOIS stuff and a few other checks but for now this is where it's at.
+
+---
+
+## if you want to contribute
+
+go ahead, open a PR or raise an issue. i'm still learning this stuff so if you see something wrong or something that could be better i genuinely want to know.
+
+---
+
+built by Anmol Kumar
